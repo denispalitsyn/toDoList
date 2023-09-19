@@ -18,6 +18,14 @@
   @apply bg-gray-500 text-white;
 }
 
+.button:disabled {
+  @apply pointer-events-none bg-gray-300;
+}
+
+.error {
+  @apply border-red-700;
+}
+
 .checkboxWrapper input {
   display: none;
 }
