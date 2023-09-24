@@ -28,7 +28,8 @@ export async function createTask(taskData) {
   const { data, error } = await supabase
     .from('tasks')
     .insert(taskData)
-    .select();
+    .select()
+    .single();
 
   if (error) {
     throw Error(error?.message || 'Что-то случилось при создании задачи');
@@ -52,10 +53,7 @@ export async function updateTask(taskData) {
 }
 
 export async function deleteTask(taskId) {
-  const { error } = await supabase
-    .from('tasks')
-    .delete()
-    .eq('id', taskId);
+  const { error } = await supabase.from('tasks').delete().eq('id', taskId);
 
   if (error) {
     throw Error(error?.message || 'Что-то случилось при удалении задачи');

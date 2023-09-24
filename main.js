@@ -1,4 +1,5 @@
 import { getUser } from './api/user';
+import { openTaskModal } from './utils/taskModalHandlers';
 
 async function start() {
   try {
@@ -7,6 +8,10 @@ async function start() {
     if (!user) {
       window.location.href = '/auth/login.html';
     }
+
+    const addTaskButton = document.querySelector('#addTaskButton');
+
+    addTaskButton.addEventListener('click', openTaskModal);
   } catch (error) {
     console.log('error', error);
   }
