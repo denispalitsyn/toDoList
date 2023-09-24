@@ -26,6 +26,10 @@
   @apply border-red-700;
 }
 
+.checkboxWrapper {
+  @apply h-max;
+}
+
 .checkboxWrapper input {
   display: none;
 }
