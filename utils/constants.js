@@ -9,3 +9,8 @@ export const priorities = {
   low: 'Низкий',
   empty: '',
 };
+
+export const statuses = {
+  active: 'active',
+  archive: 'archive',
+};

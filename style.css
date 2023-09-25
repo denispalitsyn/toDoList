@@ -81,6 +81,10 @@
   margin-bottom: 0;
 }
 
+.task.disabled {
+  @apply pointer-events-none opacity-50;
+}
+
 .openTask {
   overflow: hidden;
   animation: openTask 0.5s ease forwards;

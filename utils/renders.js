@@ -1,4 +1,4 @@
-import { createTaskHtml } from './htmlTemplates';
+import { createArchiveTaskHtml, createTaskHtml } from './htmlTemplates';
 
 export function renderUser(user) {
   const userContainer = document.querySelector('#user');
@@ -6,13 +6,21 @@ export function renderUser(user) {
   userContainer.innerHTML = user.email;
 }
 
-export function renderTasksLoader() {
+export function renderActiveTasksLoader() {
   const tasksContainer = document.querySelector('#tasksContainer');
 
   tasksContainer.innerHTML = `<div class="custom-loader"></div>`;
 }
 
-export function renderTasks(tasks) {
+export function renderArchiveTasksLoader() {
+  const archiveTasksContainer = document.querySelector(
+    '#archiveTasksContainer'
+  );
+
+  archiveTasksContainer.innerHTML = `<div class="custom-loader"></div>`;
+}
+
+export function renderActiveTasks(tasks) {
   const tasksContainer = document.querySelector('#tasksContainer');
 
   if (tasks.length) {
@@ -21,6 +29,22 @@ export function renderTasks(tasks) {
     tasksContainer.innerHTML = tasksHtml;
   } else {
     tasksContainer.innerHTML = `<div class="text-zinc-500">Нет задач</div>`;
+  }
+}
+
+export function renderArchiveTasks(archiveTasks) {
+  const archiveTasksContainer = document.querySelector(
+    '#archiveTasksContainer'
+  );
+
+  if (archiveTasks.length) {
+    const tasksHtml = archiveTasks
+      .map((archiveTask) => createArchiveTaskHtml(archiveTask))
+      .join('');
+
+    archiveTasksContainer.innerHTML = tasksHtml;
+  } else {
+    archiveTasksContainer.innerHTML = `<div class="text-zinc-500">Нет задач</div>`;
   }
 }
 
@@ -35,6 +59,28 @@ export function renderNewTask(task) {
     tasksContainer.insertAdjacentHTML('beforeend', newTask);
   } else {
     tasksContainer.innerHTML = newTask;
+  }
+}
+
+export function renderNewArchiveTask(archiveTask) {
+  const activeTasksContainer = document.querySelector('#tasksContainer');
+  const archiveTasksContainer = document.querySelector(
+    '#archiveTasksContainer'
+  );
+
+  const activeTasks = activeTasksContainer.querySelectorAll('.task');
+  const archiveTasks = archiveTasksContainer.querySelectorAll('.task');
+
+  const newArchiveTask = createArchiveTaskHtml(archiveTask, true);
+
+  if (archiveTasks.length) {
+    archiveTasksContainer.insertAdjacentHTML('beforeend', newArchiveTask);
+  } else {
+    archiveTasksContainer.innerHTML = newArchiveTask;
+  }
+
+  if (!activeTasks.length) {
+    activeTasksContainer.innerHTML = `<div class="text-zinc-500">Нет задач</div>`;
   }
 }
 
