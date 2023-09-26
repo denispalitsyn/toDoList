@@ -50,9 +50,9 @@ async function start() {
 
     await getAndRenderArchiveTasks();
 
-    const addTaskButton = document.querySelector('#addTaskButton');
-    const activeTasksContainer = document.querySelector('#tasksContainer');
-    const archiveTasksContainer = document.querySelector('#archiveTasksContainer');
+    const addTaskButton = document.querySelector('#add-task-button');
+    const activeTasksContainer = document.querySelector('#tasks-container');
+    const archiveTasksContainer = document.querySelector('#archive-tasks-container');
 
     addTaskButton.addEventListener('click', () => openTaskModal());
     activeTasksContainer.addEventListener('click', onActiveTasksContainerClick);
