@@ -1,5 +1,6 @@
 import { getActiveTasks, getArchiveTasks } from './api/task';
 import { getUser } from './api/user';
+import { onLogoutButtonClick } from './utils/logoutHandler';
 import {
   renderActiveTasks,
   renderActiveTasksLoader,
@@ -8,7 +9,10 @@ import {
   renderUser,
 } from './utils/renders';
 import { openTaskModal } from './utils/taskModalHandlers';
-import { onActiveTasksContainerClick, onArchiveTasksContainerClick } from './utils/tasksContainerHandlers';
+import {
+  onActiveTasksContainerClick,
+  onArchiveTasksContainerClick,
+} from './utils/tasksContainerHandlers';
 
 function removeUserLoader() {
   const loader = document.querySelector('#loader');
@@ -50,13 +54,20 @@ async function start() {
 
     await getAndRenderArchiveTasks();
 
+    const logoutButton = document.querySelector('#logout-button');
     const addTaskButton = document.querySelector('#add-task-button');
     const activeTasksContainer = document.querySelector('#tasks-container');
-    const archiveTasksContainer = document.querySelector('#archive-tasks-container');
+    const archiveTasksContainer = document.querySelector(
+      '#archive-tasks-container'
+    );
 
+    logoutButton.addEventListener('click', onLogoutButtonClick);
     addTaskButton.addEventListener('click', () => openTaskModal());
     activeTasksContainer.addEventListener('click', onActiveTasksContainerClick);
-    archiveTasksContainer.addEventListener('click', onArchiveTasksContainerClick);
+    archiveTasksContainer.addEventListener(
+      'click',
+      onArchiveTasksContainerClick
+    );
   } catch (error) {
     console.log('error', error);
   }
