@@ -1,5 +1,6 @@
 import { deleteTask, getTask, updateTask } from '../api/task';
 import { modes, statuses } from './constants';
+import { errorHandler } from './errorHandler';
 import { createModalHtml } from './htmlTemplates';
 import {
   makeTextIfNoTasksInContainer,
@@ -31,7 +32,7 @@ export async function onActiveTasksContainerClick(event) {
 
       renderNewArchiveTask(archiveTask);
     } catch (error) {
-      console.log('error', error);
+      errorHandler(error);
 
       taskContainer.classList.remove('disabled');
     }
@@ -58,7 +59,7 @@ export async function onActiveTasksContainerClick(event) {
         taskLoader.remove();
       }
     } catch (error) {
-      console.log('error', error);
+      errorHandler(error);
 
       closeTaskModal();
     }
@@ -89,7 +90,7 @@ export async function onArchiveTasksContainerClick(event) {
 
       renderNewTask(updatedTask);
     } catch (error) {
-      console.log('error', error);
+      errorHandler(error);
 
       taskContainer.classList.remove('disabled');
     }
@@ -142,7 +143,7 @@ export async function onArchiveTasksContainerClick(event) {
           document.querySelector('#archive-tasks-container')
         );
       } catch (error) {
-        console.log('error', error);
+        errorHandler(error);
       }
     };
 

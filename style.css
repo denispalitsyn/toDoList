@@ -75,10 +75,10 @@
 
 .task {
   display: flex;
-  margin-bottom: 16px;
+  padding-bottom: 16px;
 }
 .task:last-child {
-  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .task.disabled {
@@ -89,10 +89,16 @@
   overflow: hidden;
   animation: openTask 0.5s ease forwards;
 }
+.openTask:last-child {
+  animation: openTaskLast 0.5s ease forwards;
+}
 
 .closeTask {
   overflow: hidden;
   animation: closeTask 0.5s ease forwards;
+}
+.closeTask:last-child {
+  animation: closeTaskLast 0.5s ease forwards;
 }
 
 .smoothOpen {
@@ -134,40 +140,68 @@
 @keyframes openTask {
   0% {
     max-height: 0;
+    padding-bottom: 0;
   }
 
   100% {
     max-height: 100px;
+    padding-bottom: 16px;
+  }
+}
+
+@keyframes openTaskLast {
+  0% {
+    max-height: 0;
+    padding-bottom: 0;
+  }
+
+  100% {
+    max-height: 100px;
+    padding-bottom: 0;
   }
 }
 
 @keyframes closeTask {
   0% {
     max-height: 100px;
+    padding-bottom: 16px;
   }
 
   100% {
     max-height: 0;
+    padding-bottom: 0;
+  }
+}
+
+@keyframes closeTaskLast {
+  0% {
+    max-height: 100px;
+    padding-bottom: 0;
+  }
+
+  100% {
+    max-height: 0;
+    padding-bottom: 0;
   }
 }
 
 @keyframes openError {
   0% {
-    transform: translateY(100%);
+    transform: translateX(calc(100% + 20px));
   }
 
   100% {
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
 @keyframes closeError {
   0% {
-    transform: translateY(0);
+    transform: translateX(0);
   }
 
   100% {
-    transform: translateY(100%);
+    transform: translateX(calc(100% + 20px));
   }
 }
 
