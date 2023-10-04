@@ -3,6 +3,7 @@ import { getUser } from './api/user';
 import { errorHandler } from './utils/errorHandler';
 import { onLogoutButtonClick } from './utils/logoutHandler';
 import {
+  makeTextIfErrorInContainer,
   renderActiveTasks,
   renderActiveTasksLoader,
   renderArchiveTasks,
@@ -31,6 +32,8 @@ async function getAndRenderActiveTasks() {
 
     renderActiveTasks(activeTasks);
   } catch (error) {
+    makeTextIfErrorInContainer(document.querySelector('#tasks-container'));
+
     errorHandler(error);
   }
 }
@@ -43,6 +46,10 @@ async function getAndRenderArchiveTasks() {
 
     renderArchiveTasks(archiveTasks);
   } catch (error) {
+    makeTextIfErrorInContainer(
+      document.querySelector('#archive-tasks-container')
+    );
+
     errorHandler(error);
   }
 }
@@ -59,9 +66,7 @@ async function start() {
 
     removeUserLoader();
 
-    await getAndRenderActiveTasks();
-
-    await getAndRenderArchiveTasks();
+    await Promise.all([getAndRenderActiveTasks(), getAndRenderArchiveTasks()]);
 
     const logoutButton = document.querySelector('#logout-button');
     const addTaskButton = document.querySelector('#add-task-button');

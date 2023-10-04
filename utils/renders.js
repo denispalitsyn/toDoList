@@ -103,3 +103,11 @@ export function makeTextIfNoTasksInContainer(container) {
     container.innerHTML = `<div class="text-zinc-500">Нет задач</div>`;
   }
 }
+
+export function makeTextIfErrorInContainer(container) {
+  const tasks = container.querySelectorAll('.task');
+
+  if (!tasks.length) {
+    container.innerHTML = `<div class="text-zinc-500">Ошибка при получении задач</div>`;
+  }
+}
