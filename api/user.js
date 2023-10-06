@@ -5,7 +5,7 @@ export async function register(email, password) {
     email,
     password,
     options: {
-      emailRedirectTo: 'http://localhost:5173/auth/login.html',
+      emailRedirectTo: 'https://denispalitsyn-to-do-list.netlify.app/auth/login.html',
     },
   });
 
